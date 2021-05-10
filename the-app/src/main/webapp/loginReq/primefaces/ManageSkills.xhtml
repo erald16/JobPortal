@@ -1,0 +1,141 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+</h:head>
+<h:body>
+	<ui:composition template="../template/template.xhtml">
+		<ui:define name="content">
+		<br></br><br></br><br></br>
+			<p:growl id="growl"></p:growl>
+
+
+			<h:form id="form">
+			<p:linkButton class="button" value="back" outcome="UserProfile"></p:linkButton>
+				
+				<p:commandButton value="Add new" update="insertForm"
+							process="@this" oncomplete="PF('InsertDialog').show();">
+				</p:commandButton>
+			
+
+				<p:dataTable id="table" value="#{skillManagedBean.skills}"
+					var="skill" sortBy="#{skill.type}">
+					
+					<p:column headerText="type">
+						<p:outputLabel value="#{skill.type}"></p:outputLabel>
+					</p:column>
+
+					<p:column headerText="description">
+						<p:outputLabel value="#{skill.description}"></p:outputLabel>
+					</p:column>
+
+					<p:column headerText="LastUpdated">
+						<p:outputLabel value="#{skill.lastUpdated}">
+							<f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+						</p:outputLabel>
+					</p:column>
+
+
+					<p:column headerText="Actions">
+
+						<p:commandButton value="Edit" update="editForm"
+							process="@this" oncomplete="PF('EditDialog').show();">
+
+							<f:setPropertyActionListener
+								target="#{skillManagedBean.skill}" value="#{skill}" />
+
+						</p:commandButton>
+
+ 
+
+						<p:commandButton immediate="true" value="Delete"
+							update=":form:table growl" action="#{skillManagedBean.delete}">
+							<p:confirm header="Confirmation" message="Are you sure?"
+								icon="pi pi-exclamation-triangle" />
+
+							<f:setPropertyActionListener
+								target="#{skillManagedBean.skill}" value="#{skill}" />
+						</p:commandButton>
+
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+							<p:commandButton value="Yes" type="button"
+								styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+							<p:commandButton value="No" type="button"
+								styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+						</p:confirmDialog>
+
+					</p:column>
+
+				</p:dataTable>
+
+			</h:form>
+			
+			<h:form id="insertForm">
+
+
+				<p:dialog header="Insert User" id="insertDialog"
+					widgetVar="InsertDialog" modal="true">
+
+
+					<h:panelGrid columns="2">
+						<h:outputLabel for="type" value="Type"></h:outputLabel>
+						<p:inputText id="type" value="#{skillManagedBean.type}" required="true" requiredMessage="type can't be empty"><f:validateRequired /></p:inputText>
+						<h:outputLabel for="description" value="Description"></h:outputLabel>
+						<p:inputText id="desciption" value="#{skillManagedBean.description}" required="true" requiredMessage="description can't be empty"><f:validateRequired /></p:inputText>
+
+
+						<p:commandButton process="insertDialog" update=":form:table growl"
+							value="Save" actionListener="#{skillManagedBean.create}"
+							oncomplete="PF('InsertDialog').hide();">
+
+						</p:commandButton>
+
+
+
+					</h:panelGrid>
+
+
+				</p:dialog>
+			</h:form>
+
+
+			
+
+			<h:form id="editForm">
+
+
+				<p:dialog header="Edit Skill" id="updateDialog"
+					widgetVar="EditDialog" modal="true">
+
+
+					<h:panelGrid columns="5">
+						<h:outputLabel value="Type " for="updateType"></h:outputLabel>
+						<h:inputText id="updateType" required="true"
+							value="#{skillManagedBean.skill.type}"></h:inputText>
+							
+							<h:outputLabel value="Description " for="updateDescirption"></h:outputLabel>
+						<h:inputText id="updateDescirption" required="true"
+							value="#{skillManagedBean.skill.description}"></h:inputText>
+
+
+
+						<p:commandButton process="updateDialog" update=":form:table growl"
+							value="Save" actionListener="#{skillManagedBean.save}"
+							oncomplete="PF('EditDialog').hide();">
+
+						</p:commandButton>
+
+
+
+					</h:panelGrid>
+
+
+				</p:dialog>
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

@@ -1,0 +1,139 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+</h:head>
+<h:body>
+	<ui:composition template="../template/template.xhtml">
+		<ui:define name="content">
+			<p:growl id="growl"></p:growl>
+
+
+			<h:form id="form">
+			<p:linkButton class="button" value="back" outcome="UserProfile"></p:linkButton>
+				<h:outputLabel for="position" value="Position"></h:outputLabel>
+				<p:inputText id="position" value="#{experienceManagedBean.position}" required="true" requiredMessage="position can't be empty"><f:validateRequired /></p:inputText>
+				<h:outputLabel for="description" value="Description"></h:outputLabel>
+				<p:inputText id="desciption" value="#{experienceManagedBean.description}" required="true" requiredMessage="description can't be empty"><f:validateRequired /></p:inputText>
+				<p:outputLabel for="startDate" value="Start Date" />
+       		 	<p:datePicker id="startDate" value="#{experienceManagedBean.insertStartDate}" showIcon="true"  required="true" requiredMessage="end date can't be empty"><f:validateRequired /></p:datePicker>
+       		 	<p:outputLabel for="endDate" value="End Date" />
+       		 	<p:datePicker id="endDate" value="#{experienceManagedBean.insertEndDate}" showIcon="true" required="true" requiredMessage="end date can't be empty"><f:validateRequired /></p:datePicker>
+				
+				<p:splitButton id="basic" value="Insert"
+					action="#{experienceManagedBean.create}" update="table growl">
+				</p:splitButton>
+			
+
+				<p:dataTable id="table" value="#{experienceManagedBean.experiences}"
+					var="experience" sortBy="#{experience.startDate}">
+					
+					<p:column headerText="position">
+						<p:outputLabel value="#{experience.position}"></p:outputLabel>
+					</p:column>
+
+					<p:column headerText="description">
+						<p:outputLabel value="#{experience.description}"></p:outputLabel>
+					</p:column>
+					
+					<p:column headerText="Starting date">
+						<p:outputLabel value="#{experience.startDate}">
+						</p:outputLabel>
+					</p:column>
+					
+					<p:column headerText="Ending date">
+						<p:outputLabel value="#{experience.endDate}">
+						</p:outputLabel>
+					</p:column>
+
+					<p:column headerText="LastUpdated">
+						<p:outputLabel value="#{experience.lastUpdate}">
+						</p:outputLabel>
+					</p:column>
+
+
+					<p:column headerText="Actions">
+
+						<p:commandButton value="Edit" update="editForm"
+							process="@this" oncomplete="PF('EditDialog').show();">
+
+							<f:setPropertyActionListener
+								target="#{experienceManagedBean.experience}" value="#{experience}" />
+							<f:setPropertyActionListener
+								target="#{experienceManagedBean.updateStartDate}" value="#{experience.startDate}" />
+							<f:setPropertyActionListener
+								target="#{experienceManagedBean.updateEndDate}" value="#{experience.endDate}" />
+
+						</p:commandButton>
+
+ 
+
+						<p:commandButton immediate="true" value="Delete"
+							update=":form:table growl" action="#{experienceManagedBean.delete}">
+							<p:confirm header="Confirmation" message="Are you sure?"
+								icon="pi pi-exclamation-triangle" />
+
+							<f:setPropertyActionListener
+								target="#{experienceManagedBean.experience}" value="#{experience}" />
+								
+						</p:commandButton>
+
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+							<p:commandButton value="Yes" type="button"
+								styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+							<p:commandButton value="No" type="button"
+								styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+						</p:confirmDialog>
+
+					</p:column>
+
+				</p:dataTable>
+
+			</h:form>
+
+
+			
+
+			<h:form id="editForm">
+
+
+				<p:dialog header="Edit Skill" id="updateDialog"
+					widgetVar="EditDialog" modal="true">
+
+
+					<h:panelGrid columns="2">
+						<h:outputLabel value="Position " for="updatePosition"></h:outputLabel>
+						<h:inputText id="updatePosition" required="true"
+							value="#{experienceManagedBean.experience.position}" requiredMessage="end date can't be empty"><f:validateRequired /></h:inputText>
+							
+						<h:outputLabel value="Description " for="updateDescirption"></h:outputLabel>
+						<h:inputText id="updateDescirption" required="true"
+							value="#{experienceManagedBean.experience.description}" requiredMessage="end date can't be empty"><f:validateRequired /></h:inputText>
+							
+						<p:outputLabel for="startDate" value="Start Date" />
+       		 			<p:datePicker id="startDate" value="#{experienceManagedBean.updateStartDate}" showIcon="true" required="true" requiredMessage="end date can't be empty"><f:validateRequired /></p:datePicker>
+						
+						<p:outputLabel for="endDate" value="End Date" />
+       		 			<p:datePicker id="endDate" value="#{experienceManagedBean.updateEndDate}" showIcon="true" required="true" requiredMessage="end date can't be empty"><f:validateRequired /></p:datePicker>
+						
+
+						<p:commandButton process="updateDialog" update=":form:table growl"
+							value="Save" actionListener="#{experienceManagedBean.save}"
+							oncomplete="PF('EditDialog').hide();">
+
+						</p:commandButton>
+
+
+
+					</h:panelGrid>
+
+
+				</p:dialog>
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

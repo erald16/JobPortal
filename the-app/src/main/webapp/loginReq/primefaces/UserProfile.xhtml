@@ -1,0 +1,246 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900"
+      rel="stylesheet"
+    />
+
+    <title>Profile</title>
+    <link href="../../ress/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+
+    <link rel="stylesheet" href="../../ress/assets/css/fontawesome.css" />
+    <link rel="stylesheet" href="../../ress/assets/css/templatemo-style.css" />
+    <link rel="stylesheet" href="../../ress/assets/css/owl.css" />
+    <link rel="stylesheet" href="../../ress/assets/css/lightbox.css" />
+</h:head>
+<h:body>
+<p:growl id="growl"></p:growl>
+	<div id="page-wraper">
+      <!-- Sidebar Menu -->
+     <div class="responsive-nav">
+        <i class="fa fa-bars" id="menu-toggle"></i>
+        <div id="menu" class="menu">
+          <i class="fa fa-times" id="menu-close"></i>
+          <div class="container">
+            <div class="author-content">
+              <h4>#{profileManagedBean.user.fullname}</h4>
+              <span>#{profileManagedBean.user.accessLvl}</span>
+            </div>
+            <nav class="main-nav" role="navigation">
+              <ul class="main-menu">
+               	<li><h:link class="button" value="Manage Skills" outcome="ManageSkills"></h:link></li>
+               	<li><h:link class="button" value="Manage Experiences" outcome="ManageExperiences"></h:link></li>
+               	<li><h:link class="button" value="Manage User" outcome="ManageUser"></h:link></li>
+               	<li><h:link class="button" value="Manage Categories" outcome="ManageCategories"></h:link></li>
+               	<li><h:link class="button" value="Pot Job" outcome="PostJob"></h:link></li>
+              </ul>
+            </nav>
+            <div class="social-network">
+              <ul class="soial-icons">
+                <li>
+                  <a href="#"><i class="fa fa-home"></i></a>
+                </li>
+              </ul>
+            </div>
+			<br></br>
+            <div class="copyright-text">
+				
+              <p>Skill Portal</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="section about-me" data-section="section1">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Account Details</h2>
+            <div class="line-dec"></div>
+            <span
+              >Here you can access your account details. Make sure everything here is correct as this information will be used for your applications.</span>
+          </div>
+          <div class="left-image-post">
+          <h:form id="form">
+            <div class="row">
+            
+				<div class="col-md-3">
+                      <label>Your full name</label>
+                </div>
+				<div class="col-md-6">
+                      <p:inputText id="fullname" style="color:white; border:5px white;" value="#{profileManagedBean.user.fullname}" required="true" requiredMessage="position can't be empty"><f:validateRequired /></p:inputText>
+                </div>
+				
+					
+            </div>
+			<br></br>
+			<div class="row">
+				<div class="col-md-3">
+                      <label>Your password</label>
+                </div>
+				<div class="col-md-6">
+                      <p:inputText id="password" style="color:white; border:5px white;" value="#{profileManagedBean.user.password}" required="true" requiredMessage="position can't be empty"><f:validateRequired /></p:inputText>
+                </div>
+			</div>
+			<br></br>
+			<div class="row">
+				<div class="col-md-3">
+                      <label>Your address</label>
+                </div>
+				<div class="col-md-6">
+                      <p:inputText id="address" style="color:white; border:5px white;" value="#{profileManagedBean.user.fullname}" required="true" requiredMessage="position can't be empty"><f:validateRequired /></p:inputText>
+                </div>
+			</div>
+			<br></br>
+			<div class="row">
+				<div class="col-md-3">
+                      <label>Your website</label>
+                </div>
+				<div class="col-md-6">
+                      <p:inputText id="website" style="color:white; border:5px white;" value="#{profileManagedBean.user.website}" required="true" requiredMessage="position can't be empty"><f:validateRequired /></p:inputText>
+                </div>
+			</div>
+			<br></br>
+			<div class="row">
+				<div class="col-md-3">
+                      <label>Your email</label>
+                </div>
+				<div class="col-md-6">
+                      <p:inputText id="email" style="color:white; border:5px white;" value="#{profileManagedBean.user.email}" required="true" requiredMessage="position can't be empty"><f:validateRequired /></p:inputText>
+                </div>
+			</div>
+			<br></br>
+			<div class="row">
+				<div class="col-md-3">
+                      <label>Your phone number</label>
+                </div>
+				<div class="col-md-6">
+                     <p:inputText id="phonenumber" style="color:white; border:5px white;" value="#{profileManagedBean.user.phoneNumber}" required="true" requiredMessage="position can't be empty"><f:validateRequired /></p:inputText>
+                </div>
+                
+			</div>
+			<br></br>
+			<div class="row">
+				<p:commandButton class="col-md-12" value="save" action="#{profileManagedBean.saveUser}" update="form"></p:commandButton>
+			</div>
+			</h:form>
+			<br></br>
+			<div class="row">
+			<div class="col-md-3">
+                      <label>Upload you resume</label>
+                </div>
+                <h:form enctype="multipart/form-data" >        
+						    <p:fileUpload value="#{fileUploadView.file}" mode="simple" skinSimple="true"/>
+						    <br />
+						    <p:commandButton value="Submit" ajax="false" action="#{profileManagedBean.user}" disabled="true" />
+				</h:form>
+			</div>
+			
+          </div>
+        </div>
+      </section>
+
+      <section class="section contact-me" data-section="section4">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Manage Applications</h2>
+            <div class="line-dec"></div>
+            <span
+              >Here you can see the status of your applications and delete them if you choose to do so.(only for the first 5)</span
+            >
+          </div>
+			<table style="width:100%">
+							<tr>
+								<th>Type</th>
+								<th>Description</th>
+								<th>Start Date</th>
+								<th>End Date</th>
+							</tr>
+							<ui:repeat var="experience" value="#{experienceManagedBean.experiences}">
+			
+							<tr>
+								<td>#{experience.position}</td>
+								<td>#{experience.description}</td>
+								<td>#{experience.startDate}</td>
+								<td>#{experience.endDate}</td>
+							</tr>
+				
+							</ui:repeat>
+						</table>
+        </div>
+      </section>
+    </div>
+
+    <!-- Scripts -->
+    <!-- Bootstrap core JavaScript -->
+    <script src="../../ress/vendor/jquery/jquery.min.js"></script>
+    <script src="../../ress/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="../../ress/assets/js/isotope.min.js"></script>
+    <script src="../../ress/assets/js/owl-carousel.js"></script>
+    <script src="../../ress/assets/js/lightbox.js"></script>
+    <script src="../../ress/assets/js/custom.js"></script>
+    <script>
+		
+      //according to c
+      $(".main-menu li:first").addClass("active");
+
+      var showSection = function showSection(section, isAnimate) {
+        var direction = section.replace(/#/, ""),
+          reqSection = $(".section").filter(
+            '[data-section="' + direction + '"]'
+          ),
+          reqSectionPos = reqSection.offset().top - 0;
+
+        if (isAnimate) {
+          $("body, html").animate(
+            {
+              scrollTop: reqSectionPos
+            },
+            800
+          );
+        } else {
+          $("body, html").scrollTop(reqSectionPos);
+        }
+      };
+
+      var checkSection = function checkSection() {
+        $(".section").each(function() {
+          var $this = $(this),
+            topEdge = $this.offset().top - 80,
+            bottomEdge = topEdge + $this.height(),
+            wScroll = $(window).scrollTop();
+          if (topEdge $lt; wScroll $amp;$amp; bottomEdge $bt; wScroll) {
+            var currentId = $this.data("section"),
+              reqLink = $("a").filter("[href*=\\#" + currentId + "]");
+            reqLink
+              .closest("li")
+              .addClass("active")
+              .siblings()
+              .removeClass("active");
+          }
+        });
+      };
+
+      $(".main-menu").on("click", "a", function(e) {
+        e.preventDefault();
+        showSection($(this).attr("href"), true);
+      });
+
+      $(window).scroll(function() {
+        checkSection();
+      });
+    </script>
+</h:body>
+</html>

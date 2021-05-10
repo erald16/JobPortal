@@ -1,0 +1,80 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+</h:head>
+<h:body>
+	<ui:composition template="../template/template.xhtml">
+		<ui:define name="content">
+			<p:growl id="growl"></p:growl>
+
+			<h:form id="formSearch">
+				<p:panel id="panel" header="Search Form" style="margin-bottom:10px;">
+					<p:messages id="messages" />
+
+					<h:panelGrid columns="4" cellpadding="5">
+						<h:outputLabel for="txt1" value="Text 1: *" />
+						<p:inputText id="txt1" value="#{jobManagedBean.categoryName}"
+							label="Text 1">
+							<f:validateLength minimum="2" />
+						</p:inputText>
+						<p:commandButton value="Search"
+										actionListener="#{jobManagedBean.filter}"
+										>
+
+									</p:commandButton>
+						
+						</h:panelGrid>
+						</p:panel>
+						</h:form>
+						
+						<h:form id="formJob">
+
+							<p:commandButton value="Add new job" process="@this"
+								oncomplete="PF('InsertDialog').show();">
+							</p:commandButton>
+						
+						</h:form>
+
+
+						<h:form id="insertForm">
+
+							<p:dialog header="Create Job Post" id="insertDialog"
+								widgetVar="InsertDialog" modal="true">
+
+
+								<h:panelGrid columns="2">
+									<h:outputLabel for="title" value="Title"></h:outputLabel>
+									<p:inputText id="title"
+										value="#{jobManagedBean.jobToAdd.title}" required="true"
+										requiredMessage="Title can't be empty">
+										<f:validateRequired />
+									</p:inputText>
+									<h:outputLabel for="description" value="Description"></h:outputLabel>
+									<p:inputText id="description"
+										value="#{jobManagedBean.jobToAdd.description}" required="true"
+										requiredMessage="Description can't be empty">
+										<f:validateRequired />
+									</p:inputText>
+
+
+
+									<p:commandButton process="insertDialog" value="Save"
+										actionListener="#{jobManagedBean.insert}"
+										oncomplete="PF('InsertDialog').hide();">
+
+									</p:commandButton>
+
+
+
+								</h:panelGrid>
+
+
+							</p:dialog>
+						</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

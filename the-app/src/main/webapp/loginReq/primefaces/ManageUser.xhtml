@@ -1,0 +1,317 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+</h:head>
+<h:body>
+	<ui:composition template="../template/template.xhtml">
+		<ui:define name="content">
+			<p:growl id="growl"></p:growl>
+
+			<h:form id="formSearch">
+				<p:panel id="panel" header="Search Form" style="margin-bottom:10px;">
+					<p:messages id="messages" />
+
+					<h:panelGrid columns="4" cellpadding="5">
+						<h:outputLabel for="txt1" value="Text 1: *" />
+						<p:inputText id="txt1" value="#{jobManagedBean.categoryName}"
+							label="Text 1">
+							<f:validateLength minimum="2" />
+						</p:inputText>
+						<p:commandButton value="Search" update=":form:table growl"
+							actionListener="#{jobManagedBean.filter}">
+
+						</p:commandButton>
+
+					</h:panelGrid>
+				</p:panel>
+				<p:dataTable id="jobTable" value="#{jobManagedBean.jobs}" var="job"
+					paginator="true" rows="15" lazy="true">
+
+					<p:column headerText="Title">
+						<p:outputLabel value="#{job.title}"></p:outputLabel>
+					</p:column>
+
+					<p:column headerText="Description">
+						<p:outputLabel value="#{job.description}"></p:outputLabel>
+					</p:column>
+
+					<p:column headerText="Active">
+						<p:outputLabel value="#{job.active}"></p:outputLabel>
+					</p:column>
+
+					<p:column headerText="Created Date">
+						<p:outputLabel value="#{user.createDate}">
+						</p:outputLabel>
+					</p:column>
+					<p:column headerText="Last Update">
+						<p:outputLabel value="#{user.lastUpdate}">
+						</p:outputLabel>
+					</p:column>
+
+
+					<p:column headerText="Actions">
+
+
+
+						<p:commandButton immediate="true" value="Delete"
+							update=":form:table growl" action="#{jobManagedBean.delete}">
+							<p:confirm header="Confirmation" message="Are you sure?"
+								icon="pi pi-exclamation-triangle" />
+
+							<f:setPropertyActionListener target="#{jobManagedBean.job}"
+								value="#{job}" />
+
+						</p:commandButton>
+
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+							<p:commandButton value="Yes" type="button"
+								styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+							<p:commandButton value="No" type="button"
+								styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+						</p:confirmDialog>
+
+					</p:column>
+
+				</p:dataTable>
+			</h:form>
+			<h:form id="form">
+				<p:linkButton class="button" value="back" outcome="UserProfile"></p:linkButton>
+				<p:commandButton value="Add new" update="insertForm" process="@this"
+					oncomplete="PF('InsertDialog').show();">
+				</p:commandButton>
+
+				<p:dataTable id="table" value="#{userManagedBean.users}" var="user"
+					paginator="true" rows="15" lazy="true">
+
+					<p:column headerText="Username">
+						<p:outputLabel value="#{user.username}"></p:outputLabel>
+					</p:column>
+
+					<p:column headerText="Full name">
+						<p:outputLabel value="#{user.fullname}"></p:outputLabel>
+					</p:column>
+
+					<p:column headerText="Access Level">
+						<p:outputLabel value="#{user.accessLvl}"></p:outputLabel>
+					</p:column>
+
+					<p:column headerText="Gender">
+						<p:outputLabel value="#{user.gender}">
+						</p:outputLabel>
+					</p:column>
+
+					<p:column headerText="Address">
+						<p:outputLabel value="#{user.address}">
+						</p:outputLabel>
+					</p:column>
+
+					<p:column headerText="Email">
+						<p:outputLabel value="#{user.email}">
+						</p:outputLabel>
+					</p:column>
+					<p:column headerText="Website">
+						<p:outputLabel value="#{user.website}">
+						</p:outputLabel>
+					</p:column>
+					<p:column headerText="Phone Number">
+						<p:outputLabel value="#{user.phoneNumber}">
+						</p:outputLabel>
+					</p:column>
+					<p:column headerText="Active">
+						<p:outputLabel value="#{user.active}">
+						</p:outputLabel>
+					</p:column>
+					<p:column headerText="Created Date">
+						<p:outputLabel value="#{user.createDate}">
+						</p:outputLabel>
+					</p:column>
+					<p:column headerText="Last Update">
+						<p:outputLabel value="#{user.lastUpdate}">
+						</p:outputLabel>
+					</p:column>
+
+
+					<p:column headerText="Actions">
+
+						<p:commandButton value="Edit" update="editForm" process="@this"
+							oncomplete="PF('EditDialog').show();">
+
+							<f:setPropertyActionListener target="#{userManagedBean.user}"
+								value="#{user}" />
+
+						</p:commandButton>
+
+
+
+						<p:commandButton immediate="true" value="Delete"
+							update=":form:table growl" action="#{userManagedBean.delete}">
+							<p:confirm header="Confirmation" message="Are you sure?"
+								icon="pi pi-exclamation-triangle" />
+
+							<f:setPropertyActionListener target="#{userManagedBean.user}"
+								value="#{user}" />
+
+						</p:commandButton>
+
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+							<p:commandButton value="Yes" type="button"
+								styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+							<p:commandButton value="No" type="button"
+								styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+						</p:confirmDialog>
+
+					</p:column>
+
+				</p:dataTable>
+
+			</h:form>
+
+			<h:form id="insertForm">
+
+
+				<p:dialog header="Insert User" id="insertDialog"
+					widgetVar="InsertDialog" modal="true">
+
+
+					<h:panelGrid columns="2">
+						<h:outputLabel for="username" value="Username"></h:outputLabel>
+						<p:inputText id="username" value="#{userManagedBean.username}"
+							required="true" requiredMessage="position can't be empty">
+							<f:validateRequired />
+						</p:inputText>
+						<h:outputLabel for="password" value="Password"></h:outputLabel>
+						<p:inputText id="password" value="#{userManagedBean.password}"
+							required="true" requiredMessage="description can't be empty">
+							<f:validateRequired />
+						</p:inputText>
+						<h:outputLabel for="accesslevel" value="accesslevel"></h:outputLabel>
+						<p:inputText id="accesslevel" value="#{userManagedBean.aclevel}"
+							required="true" requiredMessage="position can't be empty">
+							<f:validateRequired />
+						</p:inputText>
+						<h:outputLabel for="fullname" value="fullname"></h:outputLabel>
+						<p:inputText id="fullname" value="#{userManagedBean.name}"
+							required="true" requiredMessage="description can't be empty">
+							<f:validateRequired />
+						</p:inputText>
+						<h:outputLabel for="gender" value="Gender"></h:outputLabel>
+						<p:inputText id="gender" value="#{userManagedBean.gender}"
+							required="true" requiredMessage="position can't be empty">
+							<f:validateRequired />
+						</p:inputText>
+						<h:outputLabel for="address" value="Address"></h:outputLabel>
+						<p:inputText id="address" value="#{userManagedBean.address}"
+							required="true" requiredMessage="position can't be empty">
+							<f:validateRequired />
+						</p:inputText>
+						<h:outputLabel for="email" value="Email"></h:outputLabel>
+						<p:inputText id="email" value="#{userManagedBean.email}"
+							required="true" requiredMessage="position can't be empty">
+							<f:validateRequired />
+						</p:inputText>
+						<h:outputLabel for="website" value="Gender"></h:outputLabel>
+						<p:inputText id="website" value="#{userManagedBean.website}"
+							required="true" requiredMessage="position can't be empty">
+							<f:validateRequired />
+						</p:inputText>
+						<h:outputLabel for="phonenumber" value="Phone number"></h:outputLabel>
+						<p:inputText id="phonenumber" value="#{userManagedBean.phoneNr}"
+							required="true" requiredMessage="position can't be empty">
+							<f:validateRequired />
+						</p:inputText>
+
+
+						<p:commandButton process="insertDialog" update=":form:table growl"
+							value="Save" actionListener="#{userManagedBean.create}"
+							oncomplete="PF('InsertDialog').hide();">
+
+						</p:commandButton>
+
+
+
+					</h:panelGrid>
+
+
+				</p:dialog>
+			</h:form>
+
+
+			<h:form id="editForm">
+
+
+				<p:dialog header="Edit Skill" id="updateDialog"
+					widgetVar="EditDialog" modal="true">
+
+
+					<h:panelGrid columns="2">
+						<h:outputLabel value="Username " for="updateUsername"></h:outputLabel>
+						<h:inputText id="updateUsername" required="true"
+							value="#{userManagedBean.user.username}"
+							requiredMessage="end date can't be empty">
+							<f:validateRequired />
+						</h:inputText>
+
+						<h:outputLabel value="Full Name " for="updateFullname"></h:outputLabel>
+						<h:inputText id="updateFullname" required="true"
+							value="#{userManagedBean.user.fullname}"
+							requiredMessage="end date can't be empty">
+							<f:validateRequired />
+						</h:inputText>
+
+						<h:outputLabel value="Access Level " for="updateAccessLevel"></h:outputLabel>
+						<h:inputText id="updateAccessLevel" required="true"
+							value="#{userManagedBean.user.accessLvl}"
+							requiredMessage="end date can't be empty">
+							<f:validateRequired />
+						</h:inputText>
+
+						<h:outputLabel value="Address " for="updateAddress"></h:outputLabel>
+						<h:inputText id="updateAddress" required="true"
+							value="#{userManagedBean.user.address}"
+							requiredMessage="end date can't be empty">
+							<f:validateRequired />
+						</h:inputText>
+
+						<h:outputLabel value="Email " for="updateEmail"></h:outputLabel>
+						<h:inputText id="updateEmail" required="true"
+							value="#{userManagedBean.user.email}"
+							requiredMessage="end date can't be empty">
+							<f:validateRequired />
+						</h:inputText>
+
+						<h:outputLabel value="Website " for="updateWebsite"></h:outputLabel>
+						<h:inputText id="updateWebsite" required="true"
+							value="#{userManagedBean.user.website}"
+							requiredMessage="end date can't be empty">
+							<f:validateRequired />
+						</h:inputText>
+
+						<h:outputLabel value="Phone Number " for="updatePhoneNumber"></h:outputLabel>
+						<h:inputText id="updatePhoneNumber" required="true"
+							value="#{userManagedBean.user.phoneNumber}"
+							requiredMessage="end date can't be empty">
+							<f:validateRequired />
+						</h:inputText>
+
+
+						<p:commandButton process="updateDialog" update=":form:table growl"
+							value="Save" actionListener="#{userManagedBean.save}"
+							oncomplete="PF('EditDialog').hide();">
+
+						</p:commandButton>
+
+
+
+					</h:panelGrid>
+
+
+				</p:dialog>
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

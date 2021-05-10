@@ -1,0 +1,437 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900"
+      rel="stylesheet"
+    />
+
+    <title>Profile</title>
+    <!-- Bootstrap core CSS -->
+    <link href="../../ress/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="../../ress/assets/css/fontawesome.css" />
+    <link rel="stylesheet" href="../../ress/assets/css/templatemo-style.css" />
+    <link rel="stylesheet" href="../../ress/assets/css/owl.css" />
+    <link rel="stylesheet" href="../../ress/assets/css/lightbox.css" />
+</h:head>
+<h:body>
+<p:growl id="growl"></p:growl>
+	<div id="page-wraper">
+      <!-- Sidebar Menu -->
+      <div class="responsive-nav">
+        <i class="fa fa-bars" id="menu-toggle"></i>
+        <div id="menu" class="menu">
+          <i class="fa fa-times" id="menu-close"></i>
+          <div class="container">
+            <div class="author-content">
+			<br></br><br></br>
+              <h4>Empty</h4>
+              <span>Admin</span>
+            </div>
+            <nav class="main-nav" role="navigation">
+              <ul class="main-menu">
+                <li><a href="#section1">Account Details</a></li>
+                <li><a href="#section2">Experiences</a></li>
+                <li><a href="#section3">Skills</a></li>
+                <li><a href="#section4">Applications</a></li>
+              </ul>
+            </nav>
+            <div class="social-network">
+              <ul class="soial-icons">
+                <li>
+                  <a href="#"><i class="fa fa-home"></i></a>
+                </li>
+              </ul>
+            </div>
+			<br></br>
+            <div class="copyright-text">
+				
+              <p>Skill Portal</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="section about-me" data-section="section1">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Account Details</h2>
+            <div class="line-dec"></div>
+            <span
+              >Here you can access your account details. Make sure everything here is correct as this information will be used for your applications.</span
+            >
+          </div>
+          <div class="left-image-post">
+            <div class="row">
+				<div class="col-md-3">
+                      <label>Your full name</label>
+                </div>
+				<div class="col-md-6">
+                      <fieldset>
+                        <input style="background-color:transparent; border-color:white;"
+                          name="Full Name"
+                          type="text"
+                          class="form-control"
+                          id="name"
+                          placeholder="Your name..."
+                        />
+                      </fieldset>
+                </div>
+				
+					
+            </div>
+			<br></br>
+			<div class="row">
+				<div class="col-md-3">
+                      <label>Your password</label>
+                </div>
+				<div class="col-md-6">
+                      <fieldset>
+                        <input style="background-color:transparent; border-color:white;"
+                          name="Full Name"
+                          type="text"
+                          class="form-control"
+                          id="name"
+                          placeholder="Your name..."
+                        />
+                      </fieldset>
+                </div>
+			</div>
+			<br></br>
+			<div class="row">
+				<div class="col-md-3">
+                      <label>Your address</label>
+                </div>
+				<div class="col-md-6">
+                      <fieldset>
+                        <input style="background-color:transparent; border-color:white;"
+                          name="Full Name"
+                          type="text"
+                          class="form-control"
+                          id="name"
+                          placeholder="Your name..."
+                        />
+                      </fieldset>
+                </div>
+			</div>
+			<br></br>
+			<div class="row">
+				<div class="col-md-3">
+                      <label>Your website</label>
+                </div>
+				<div class="col-md-6">
+                      <fieldset>
+                        <input style="background-color:transparent; border-color:white;"
+                          name="Full Name"
+                          type="text"
+                          class="form-control"
+                          id="name"
+                          placeholder="Your name..."
+                        />
+                      </fieldset>
+                </div>
+			</div>
+			<br></br>
+			<div class="row">
+				<div class="col-md-3">
+                      <label>Your email</label>
+                </div>
+				<div class="col-md-6">
+                      <fieldset>
+                        <input style="background-color:transparent; border-color:white;"
+                          name="Full Name"
+                          type="text"
+                          class="form-control"
+                          id="name"
+                          placeholder="Your name..."
+                        />
+                      </fieldset>
+                </div>
+			</div>
+			<br></br>
+			<div class="row">
+				<div class="col-md-3">
+                      <label>Your phone number</label>
+                </div>
+				<div class="col-md-6">
+                      <fieldset>
+                        <input style="background-color:transparent; border-color:white;"
+                          name="Full Name"
+                          type="text"
+                          class="form-control"
+                          id="name"
+                          placeholder="Your name..."
+                        />
+                      </fieldset>
+                </div>
+			</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section my-services" data-section="section2">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Your Experiences</h2>
+					<ui:repeat id="experienceTable" var="experience" value="#{experienceManagedBean.experiences}">
+    					<div class="card" style="width: 40rem; background:#777;">
+							  <div class="card-body">
+							    <h5 class="card-title" style="color:white;">#{experience.position}</h5>
+							    <hr style="border-color:white;"></hr>
+							    <h6 class="card-subtitle mb-1" style="color:#c3c4c4;">#{experience.startDate} - #{experience.endDate}</h6>
+							    <p class="card-text" style="color:white;">#{experience.description}</p>
+							  </div>
+							</div>
+					</ui:repeat>
+					
+					<p:commandButton update="addExpForm"
+							process="@this" oncomplete="PF('addExpDialog').show();"><i class="far fa-plus-octagon"></i>
+					</p:commandButton>
+				<h:form id="addExpForm">
+
+
+				<p:dialog header="Add Experience" id="insertExpDialog"
+					widgetVar="addExpDialog" modal="true">
+
+
+					<h:panelGrid columns="2">
+						<h:outputLabel value="Position " for="updatePosition"></h:outputLabel>
+						<h:inputText id="updatePosition" required="true"
+							value="#{profileManagedBean.experience.position}" requiredMessage="end date can't be empty"><f:validateRequired /></h:inputText>
+							
+						<h:outputLabel value="Description " for="updateDescirption"></h:outputLabel>
+						<h:inputText id="updateDescirption" required="true"
+							value="#{profileManagedBean.experience.description}" requiredMessage="end date can't be empty"><f:validateRequired /></h:inputText>
+							
+						<p:outputLabel for="startDate" value="Start Date" />
+       		 			<p:datePicker id="startDate" value="#{profileManagedBean.experience.startDate}" showIcon="true" required="true" requiredMessage="end date can't be empty"><f:validateRequired /></p:datePicker>
+						
+						<p:outputLabel for="endDate" value="End Date" />
+       		 			<p:datePicker id="endDate" value="#{profileManagedBean.experience.endDate}" showIcon="true" required="true" requiredMessage="end date can't be empty"><f:validateRequired /></p:datePicker>
+						
+
+						<p:commandButton process="insertExpDialog" update="experienceTable growl"
+							value="Save" actionListener="#{profileManagedBean.saveExperience}"
+							oncomplete="PF('addExpDialog').hide();">
+
+						</p:commandButton>
+
+
+
+					</h:panelGrid>
+
+
+				</p:dialog>
+			</h:form>
+          </div>
+        </div>
+      </section>
+
+      <section class="section my-work" data-section="section3">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Manage Skill</h2>
+            <div class="line-dec"></div>
+            <span
+              >Here you can add or remove skills from your profile.</span
+            >
+          </div>
+          <div class="row">
+            <div class="isotope-wrapper">
+              <form class="isotope-toolbar">
+                <label
+                  ><input
+                    type="radio"
+                    data-type="*"
+                    name="isotope-filter"
+                  />
+                  <span>all</span></label
+                >
+                <label
+                  ><input
+                    type="radio"
+                    data-type="people"
+                    name="isotope-filter"
+                  />
+                  <span>people</span></label
+                >
+                <label
+                  ><input
+                    type="radio"
+                    data-type="bomb"
+                    name="isotope-filter"
+                  />
+                  <span>bomb</span></label
+                >
+                <label
+                  ><input
+                    type="radio"
+                    data-type="animals"
+                    name="isotope-filter"
+                  />
+                  <span>animals</span></label
+                >
+              </form>
+              <div class="isotope-box">
+                <div class="isotope-item" data-type="bomb">
+				
+				  <div>
+						<a
+                        href="#"
+                        data-lightbox="image-1"
+                        data-title="Caption"
+                        ><i class="fa fa-paper-plane"></i
+                      ></a>
+                      <h4>Job Position</h4>
+                      <span>short overview</span>
+				  </div>
+                </div>
+				<div class="isotope-item" data-type="people">
+				
+				  <div>
+						<a
+                        href="#"
+                        data-lightbox="image-1"
+                        data-title="Caption"
+                        ><i class="fa fa-paper-plane"></i
+                      ></a>
+                      <h4>Job Position</h4>
+                      <span>short overview</span>
+				  </div>
+                </div>
+				<div class="isotope-item" data-type="people">
+				
+				  <div>
+						<a
+                        href="#"
+                        data-lightbox="image-1"
+                        data-title="Caption"
+                        ><i class="fa fa-paper-plane"></i
+                      ></a>
+                      <h4>Job Position</h4>
+                      <span>short overview</span>
+				  </div>
+                </div>
+				<div class="isotope-item" data-type="people">
+				
+				  <div>
+						<a
+                        href="#"
+                        data-lightbox="image-1"
+                        data-title="Caption"
+                        ><i class="fa fa-paper-plane"></i
+                      ></a>
+                      <h4>Job Position</h4>
+                      <span>short overview</span>
+				  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section contact-me" data-section="section4">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Manage Applications</h2>
+            <div class="line-dec"></div>
+            <span
+              >Here you can see the status of your applications and delete them if you choose to do so.(only for the first 5)</span
+            >
+          </div>
+			<table style="width:100%">
+							<tr>
+								<th>Type</th>
+								<th>Description</th>
+								<th>Start Date</th>
+								<th>End Date</th>
+							</tr>
+							<ui:repeat var="experience" value="#{experienceManagedBean.experiences}">
+			
+							<tr>
+								<td>#{experience.position}</td>
+								<td>#{experience.description}</td>
+								<td>#{experience.startDate}</td>
+								<td>#{experience.endDate}</td>
+							</tr>
+				
+							</ui:repeat>
+						</table>
+        </div>
+      </section>
+    </div>
+
+    <!-- Scripts -->
+    <!-- Bootstrap core JavaScript -->
+    <script src="../../ress/vendor/jquery/jquery.min.js"></script>
+    <script src="../../ress/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="../../ress/assets/js/isotope.min.js"></script>
+    <script src="../../ress/assets/js/owl-carousel.js"></script>
+    <script src="../../ress/assets/js/lightbox.js"></script>
+    <script src="../../ress/assets/js/custom.js"></script>
+    <script>
+      //according to loftblog tut
+      $(".main-menu li:first").addClass("active");
+
+      var showSection = function showSection(section, isAnimate) {
+        var direction = section.replace(/#/, ""),
+          reqSection = $(".section").filter(
+            '[data-section="' + direction + '"]'
+          ),
+          reqSectionPos = reqSection.offset().top - 0;
+
+        if (isAnimate) {
+          $("body, html").animate(
+            {
+              scrollTop: reqSectionPos
+            },
+            800
+          );
+        } else {
+          $("body, html").scrollTop(reqSectionPos);
+        }
+      };
+
+      var checkSection = function checkSection() {
+        $(".section").each(function() {
+          var $this = $(this),
+            topEdge = $this.offset().top - 80,
+            bottomEdge = topEdge + $this.height(),
+            wScroll = $(window).scrollTop();
+          if (topEdge $lt; wScroll $amp;$amp; bottomEdge $bt; wScroll) {
+            var currentId = $this.data("section"),
+              reqLink = $("a").filter("[href*=\\#" + currentId + "]");
+            reqLink
+              .closest("li")
+              .addClass("active")
+              .siblings()
+              .removeClass("active");
+          }
+        });
+      };
+
+      $(".main-menu").on("click", "a", function(e) {
+        e.preventDefault();
+        showSection($(this).attr("href"), true);
+      });
+
+      $(window).scroll(function() {
+        checkSection();
+      });
+    </script>
+</h:body>
+</html>

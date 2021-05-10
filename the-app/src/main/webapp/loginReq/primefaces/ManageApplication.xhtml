@@ -1,0 +1,96 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+</h:head>
+<h:body>
+	<ui:composition template="../template/template.xhtml">
+		<ui:define name="content">
+			<p:growl id="growl"></p:growl>
+
+
+			<h:form id="form">
+				<h:outputLabel for="active" value="Active"></h:outputLabel>
+				<p:inputText id="active" value="#{applicationManagedBean.active}" required="true" requiredMessage="position can't be empty"><f:validateRequired /></p:inputText>
+				<h:outputLabel for="status" value="Status"></h:outputLabel>
+				<p:inputText id="status" value="#{applicationManagedBean.status}" required="true" requiredMessage="description can't be empty"><f:validateRequired /></p:inputText>
+
+				<p:splitButton id="basic" value="Insert"
+					action="#{applicationManagedBean.create}" update="table growl">
+				</p:splitButton>
+			
+
+				<p:dataTable id="table" value="#{applicationManagedBean.appplications}"
+					var="application" sortBy="#{experience.startDate}">
+					
+					<p:column headerText="Status">
+						<p:outputLabel value="#{application.status}"></p:outputLabel>
+					</p:column>
+
+					<p:column headerText="Active">
+						<p:outputLabel value="#{application.active}"></p:outputLabel>
+					</p:column>
+					
+					<p:column headerText="Created Date">
+						<p:outputLabel value="#{application.createDate}">
+						</p:outputLabel>
+					</p:column>
+					
+					<p:column headerText="Last Update">
+						<p:outputLabel value="#{application.lastUpdate}">
+						</p:outputLabel>
+					</p:column>
+
+					<p:column headerText="Users Full Name">
+						<p:outputLabel value="#{application.user.fullname}">
+						</p:outputLabel>
+					</p:column>
+					
+					<p:column headerText="Job Title">
+						<p:outputLabel value="#{application.job.title}">
+					</p:outputLabel>
+					</p:column>
+					
+
+
+					<p:column headerText="Actions">
+
+						<p:commandButton value="Edit" update="editForm"
+							process="@this" oncomplete="PF('EditDialog').show();">
+
+							<f:setPropertyActionListener
+								target="#{applicationManagedBean.application}" value="#{application}" />
+
+						</p:commandButton>
+
+ 
+
+						<p:commandButton immediate="true" value="Delete"
+							update=":form:table growl" action="#{applicationManagedBean.delete}">
+							<p:confirm header="Confirmation" message="Are you sure?"
+								icon="pi pi-exclamation-triangle" />
+
+							<f:setPropertyActionListener
+								target="#{applicationManagedBean.application}" value="#{application}" />
+								
+						</p:commandButton>
+
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+							<p:commandButton value="Yes" type="button"
+								styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+							<p:commandButton value="No" type="button"
+								styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+						</p:confirmDialog>
+
+					</p:column>
+
+				</p:dataTable>
+
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

@@ -1,0 +1,157 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900"
+      rel="stylesheet"
+    />
+
+    <title>Profile</title>
+    <link href="../../ress/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+
+    <link rel="stylesheet" href="../../ress/assets/css/fontawesome.css" />
+    <link rel="stylesheet" href="../../ress/assets/css/templatemo-style.css" />
+    <link rel="stylesheet" href="../../ress/assets/css/owl.css" />
+    <link rel="stylesheet" href="../../ress/assets/css/lightbox.css" />
+</h:head>
+<h:body>
+<p:growl id="growl"></p:growl>
+	<div id="page-wraper">
+      <!-- Sidebar Menu -->
+     <div class="responsive-nav">
+        <i class="fa fa-bars" id="menu-toggle"></i>
+        <div id="menu" class="menu">
+          <i class="fa fa-times" id="menu-close"></i>
+          <div class="container">
+            <div class="author-content">
+              <h4>#{profileManagedBean.user.fullname}</h4>
+              <span>#{profileManagedBean.user.accessLvl}</span>
+            </div>
+            <nav class="main-nav" role="navigation">
+              <ul class="main-menu">
+                <li><h:link class="button" value="Account details"></h:link></li>
+                <li><h:link class="button" value="Experiences" rendered="#{loginManagedBean.user.accessLvl == 'js' || loginManagedBean.user.accessLvl == 'jo'}"></h:link></li>
+               	<li><h:link class="button" value="Skills" rendered="#{loginManagedBean.user.accessLvl == 'js'}"></h:link></li>
+               	<li><h:link class="button" value="Applications" rendered="#{loginManagedBean.user.accessLvl == 'js'}"></h:link></li>
+              </ul>
+            </nav>
+            <div class="social-network">
+              <ul class="soial-icons">
+                <li>
+                  <a href="#"><i class="fa fa-home"></i></a>
+                </li>
+              </ul>
+            </div>
+			<br></br>
+            <div class="copyright-text">
+				
+              <p>Skill Portal</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <section class="section my-services" data-section="section2">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Your Experiences</h2>
+					<ui:repeat id="experienceTable" var="experience" value="#{experienceManagedBean.experiences}">
+					<div class="row">
+					</div>
+    					<div class="card col-md-6" style="background:#777;">
+							  <div class="card-body">
+							    <h5 class="card-title" style="color:white;">#{experience.position}</h5>
+							    <hr style="border-color:white;"></hr>
+							    <h6 class="card-subtitle mb-1" style="color:#c3c4c4;">#{experience.startDate} - #{experience.endDate}</h6>
+							    <p class="card-text" style="color:white;">#{experience.description}</p>
+							  </div>
+							</div>
+					</ui:repeat>
+          </div>
+        </div>
+      </section>
+      
+      <h:panelGroup widgetvar="group" hide="true">
+      <section class="section about-me" data-section="section1">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Account Details</h2>
+            <div class="line-dec"></div>
+            <span
+              >Here you can access your account details. Make sure everything here is correct as this information will be used for your applications.</span>
+          </div>
+          <div class="left-image-post">
+          <h:form id="form">
+            <div class="row">
+            
+				<div class="col-md-3">
+                      <label>Experience position</label>
+                </div>
+				<div class="col-md-6">
+                      <p:inputText id="fullname" style="color:white; border:5px white;" value="#{profileManagedBean.experience.position}" required="true" requiredMessage="position can't be empty"><f:validateRequired /></p:inputText>
+                </div>
+				
+					
+            </div>
+            <br></br>
+			<div class="row">
+				<div class="col-md-3">
+                      <label>Experience Description</label>
+                </div>
+				<div class="col-md-6">
+                      <p:inputText id="Description" style="color:white; border:5px white;" value="#{profileManagedBean.experience.position}" required="true" requiredMessage="position can't be empty"><f:validateRequired /></p:inputText>
+                </div>
+			</div>
+			<br></br>
+			<div class="row">
+				<div class="col-md-3">
+                      <label>Experience start date</label>
+                </div>
+				<div class="col-md-6">
+                      <p:datePicker id="endDate1" value="#{profileManagedBean.insertStartDate}" showIcon="true" required="true" requiredMessage="end date can't be empty"><f:validateRequired /></p:datePicker>
+                </div>
+			</div>
+			<br></br>
+			<div class="row">
+				<div class="col-md-3">
+                      <label>Experience end date</label>
+                </div>
+				<div class="col-md-6">
+                      <p:datePicker id="endDate2" value="#{profileManagedBean.insertEndDate}" showIcon="true" required="true" requiredMessage="end date can't be empty"><f:validateRequired /></p:datePicker>
+                </div>
+			</div>
+			<br></br>
+			<div class="row">
+				<p:commandButton class="col-md-12" value="add" action="#{profileManagedBean.createExperience}" update="form" onclick="group.hide();"></p:commandButton>
+			</div>
+			</h:form>
+          </div>
+        </div>
+      </section>
+	</h:panelGroup>
+      
+      
+      </div>
+
+    <!-- Scripts -->
+    <!-- Bootstrap core JavaScript -->
+    <script src="../../ress/vendor/jquery/jquery.min.js"></script>
+    <script src="../../ress/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="../../ress/assets/js/isotope.min.js"></script>
+    <script src="../../ress/assets/js/owl-carousel.js"></script>
+    <script src="../../ress/assets/js/lightbox.js"></script>
+    <script src="../../ress/assets/js/custom.js"></script>
+</h:body>
+</html>
